@@ -5,21 +5,23 @@ from tkinter import filedialog
 import todoist
 from dotenv import load_dotenv
 
+root = tk.Tk()
+root.withdraw()
+
 load_dotenv('---.env')
 TOKEN = os.getenv('TOKEN')
 
-print(TOKEN)
-
 todoist_api = todoist.TodoistAPI(TOKEN)
 todoist_api.sync()
-print(todoist_api['user']['full_name']) 
 
-item = todoist_api.items.add('first test task')
+"""
+example adding item
+item = todoist_api.items.add('first test task', due={
+    "date": "2021-08-25"
+})
+print(item)
 todoist_api.commit()
-
-
-root = tk.Tk()
-root.withdraw()
+"""
 
 file_path = filedialog.askopenfilename(filetypes=(("Excel files", "*.xlsx"), ("All files", "*.")))
 
